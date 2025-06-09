@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List - 任务管理</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="description" content="一个简洁高效的任务管理应用，帮助您记录每日待办事项">
+    <meta http-equiv="Cache-Control" content="public, max-age=31536000, immutable">
+</head>
+<body>
+    <!-- 加载状态 -->
+    <div id="loading" class="loading-screen">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">应用加载中...</div>
+    </div>
+
+    <!-- 主容器 -->
+    <div class="container">
+        <header>
+            <h1>To-Do List</h1>
+            <p class="subtitle">记录您的任务</p>
+        </header>
+
+        <main>
+            <!-- 任务表单 -->
+            <section class="task-form-section">
+                <form id="taskForm" class="task-form">
+                    <div class="form-group">
+                        <input type="text" id="taskInput" name="taskInput" placeholder="任务内容" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="taskTags" name="taskTags" placeholder="标签 (用逗号分隔)">
+                    </div>
+                    <div class="form-group">
+                        <label for="taskCategory" class="form-label">任务分类</label>
+                        <select id="taskCategory" name="taskCategory" title="选择任务分类">
+                            <option value="">选择分类</option>
+                            <option value="工作">工作</option>
+                            <option value="学习">学习</option>
+                            <option value="生活">生活</option>
+                            <option value="娱乐">娱乐</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="taskPriority" class="form-label">优先级</label>
+                        <select id="taskPriority" name="taskPriority" title="选择任务优先级">
+                            <option value="">优先级</option>
+                            <option value="高">高</option>
+                            <option value="中">中</option>
+                            <option value="低">低</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="dueDate" class="form-label">截止日期</label>
+                        <input type="date" id="dueDate" name="dueDate" placeholder="选择日期">
+                    </div>
+                    <button type="submit" id="addTaskBtn" class="primary-btn">
+                        <span class="btn-icon">+</span> 添加任务
+                    </button>
+                </form>
+            </section>
+
+            <!-- 搜索和筛选 -->
+            <section class="search-filter-section">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="搜索任务...">
+                </div>
+                
+                <div class="filter-box">
+                    <div class="filter-item">
+                        <label for="categoryFilter" class="filter-label">分类</label>
+                        <select id="categoryFilter" title="按分类筛选任务">
+                            <option value="">所有分类</option>
+                            <option value="工作">工作</option>
+                            <option value="学习">学习</option>
+                            <option value="生活">生活</option>
+                        </select>
+                    </div>
+                    <div class="filter-item">
+                        <label for="priorityFilter" class="filter-label">优先级</label>
+                        <select id="priorityFilter" title="按优先级筛选任务">
+                            <option value="">所有优先级</option>
+                            <option value="高">高</option>
+                            <option value="中">中</option>
+                            <option value="低">低</option>
+                        </select>
+                    </div>
+                    <div class="filter-item">
+                        <label for="statusFilter" class="filter-label">状态</label>
+                        <select id="statusFilter" title="按状态筛选任务">
+                            <option value="">所有状态</option>
+                            <option value="已完成">已完成</option>
+                            <option value="未完成">未完成</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 项目分组 -->
+            <section id="projectsContainer" class="projects-container"></section>
+
+            <!-- 任务统计 -->
+            <section class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div id="totalTasks" class="stat-value">0</div>
+                        <div class="stat-label">总任务</div>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div id="completedTasks" class="stat-value">0</div>
+                        <div class="stat-label">已完成</div>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div id="pendingTasks" class="stat-value">0</div>
+                        <div class="stat-label">待完成</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- 主题切换 -->
+        <footer>
+            <button id="themeToggle" class="theme-toggle" aria-label="切换主题">
+                <span class="theme-icon">🌓</span> 切换主题
+            </button>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
